@@ -30,20 +30,18 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
-        
-        // if i hit the space key
-        // spawn gameObject
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire) {
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        {
             Debug.Log("Space Key Pressed");
-            _canFire = Time.time + _fireRate;
-
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+            FireLaser();
         }
+
     }
 
     // class to calculate movement of player
-    void CalculateMovement() {
+    void CalculateMovement()
+    {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         // new Vector(1,0,0) * -1 - 3.5f - real time
@@ -69,11 +67,26 @@ public class Player : MonoBehaviour
         // else if player on the x  is less than -11
         // x pos = 11
 
-        
-        if (transform.position.x > 11.3f) {
+
+        if (transform.position.x > 11.3f)
+        {
             transform.position = new Vector3(-11.3f, transform.position.y, 0);
-        } else if (transform.position.x < -11.3f) {
+        }
+        else if (transform.position.x < -11.3f)
+        {
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
+    }
+
+    void FireLaser()
+    {
+
+        // if i hit the space key
+        // spawn gameObject
+
+        _canFire = Time.time + _fireRate;
+
+        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+
     }
 }
