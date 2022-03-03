@@ -33,9 +33,30 @@ public class Enemy : MonoBehaviour
         // destroy us
         // damage the player
 
+        // is needed to added a new tag for each item (laser, enemy and player)
+        if (other.tag == "Player") {
+            // damage player
+            // other.transform.GetComponent<Player>().Damage(); // to access Damage class
+            Player player = other.transform.GetComponent<Player>(); 
+
+            if (player != null) {
+                player.Damage();
+            }
+
+
+            Destroy(this.gameObject);
+            
+        }
+
         // if other is laser
-        // destroy us
         // laser
+        // destroy us
+        if (other.tag == "Laser") {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+
+        
         Debug.Log("Hit: " + other.transform.name);
     }
 }
