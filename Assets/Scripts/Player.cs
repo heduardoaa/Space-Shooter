@@ -15,11 +15,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
-    private float _fireRate = 0.5f;
+    private float _fireRate = -3.96f;
     private float _canFire = -1f;
     [SerializeField]
     private int _lives = 3;
     private SpawnManager _spawnManager;
+
+
+    // variable for _isTripleShotActive
+    [SerializeField]
+    private bool _isTripleShotActive = false;
+    [SerializeField]
+    private GameObject _tripleShotPrefab;
 
 
     // Start is called before the first frame update
@@ -95,13 +102,31 @@ public class Player : MonoBehaviour
 
         _canFire = Time.time + _fireRate;
 
-        Instantiate(_laserPrefab, transform.position + new Vector3(0.001f, -0.075f, 0), Quaternion.identity);
+
+        // if space key press, fire 1 laser
+        // if tripleshot active is true
+        // fire 3 lasers (triple shot prefab)
+        // else fire 1 laser
+        if (_isTripleShotActive == true)
+        {
+            // instanteate for the triple shot
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(_laserPrefab, transform.position + new Vector3(0.001f, -0.075f, 0), Quaternion.identity);
+
+        }
+
+
+        // instantiate 3 lasers ( 3 shot prefab)
 
     }
 
     public void Damage()
     {
-        _lives--;
+        // _lives--;
+        _lives = _lives - 1;
 
         // check if dead
         //destroy us
@@ -114,5 +139,20 @@ public class Player : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+    }
+
+    public void TripleShotActive() {
+        // tripleshotactive becomes true
+        // start the power down coroutine for triple shot
+        _isTripleShotActive = true;
+        StartCoroutine(TripleShotPowerDownRoutine());
+
+    }
+    // ienumerator triple shot powerdownroutine
+    //wait 5 seconds
+    // set the triple shot to false
+    IEnumerator TripleShotPowerDownRoutine() {
+        yield return new WaitForSeconds(5.0f);
+        _isTripleShotActive = false;
     }
 }
