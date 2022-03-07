@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     private GameObject _tripleShotPrefab;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
