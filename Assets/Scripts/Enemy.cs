@@ -28,35 +28,39 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) { // For 2D
+    private void OnTriggerEnter2D(Collider2D other)
+    { // For 2D
         // if other is player
         // destroy us
         // damage the player
 
         // is needed to added a new tag for each item (laser, enemy and player)
-        if (other.tag == "Player") {
+        if (other.tag == "Player")
+        {
             // damage player
             // other.transform.GetComponent<Player>().Damage(); // to access Damage class
-            Player player = other.transform.GetComponent<Player>(); 
+            Player player = other.transform.GetComponent<Player>();
 
-            if (player != null) {
+            if (player != null)
+            {
                 player.Damage();
             }
 
 
             Destroy(this.gameObject);
-            
+
         }
 
         // if other is laser
         // laser
         // destroy us
-        if (other.tag == "Laser") {
+        if (other.tag == "Laser")
+        {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
 
-        
+
         Debug.Log("Hit: " + other.transform.name);
     }
 }
