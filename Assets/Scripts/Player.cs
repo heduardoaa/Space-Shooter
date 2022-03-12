@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _speed = 3.5f;
+    private float _speedMultiplier = 2;
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
@@ -25,6 +26,8 @@ public class Player : MonoBehaviour
     // variable for _isTripleShotActive
     [SerializeField]
     private bool _isTripleShotActive = false;
+    [SerializeField]
+    private bool _isSpeedBoostActive = false;
     [SerializeField]
     private GameObject _tripleShotPrefab;
 
@@ -50,7 +53,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
-            Debug.Log("Space Key Pressed");
+            // Debug.Log("Space Key Pressed");
             FireLaser();
         }
 
@@ -66,6 +69,20 @@ public class Player : MonoBehaviour
         // transform.Translate(Vector3.up * verticalInput * _speed * Time.deltaTime);
         // is the same but only in one line
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+
+        // if speedboostactive  is false
+        // else speedbost multipliers
+        // (if and else )it is not necesary because on SpeedBoostPowerDownRoutine and SpeedBoostActive _speed value is modified there
+        /*         if (_isSpeedBoostActive == false)
+                {
+                    transform.Translate(direction * _speed * Time.deltaTime);
+
+                }
+                else
+                {
+                    transform.Translate(direction * (_speed * _speedMultiplier) * Time.deltaTime);
+
+                } */
         transform.Translate(direction * _speed * Time.deltaTime);
 
         // if player position on the y is greater than 0
@@ -142,7 +159,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TripleShotActive() {
+    public void TripleShotActive()
+    {
         // tripleshotactive becomes true
         // start the power down coroutine for triple shot
         _isTripleShotActive = true;
@@ -152,8 +170,22 @@ public class Player : MonoBehaviour
     // ienumerator triple shot powerdownroutine
     //wait 5 seconds
     // set the triple shot to false
-    IEnumerator TripleShotPowerDownRoutine() {
+    IEnumerator TripleShotPowerDownRoutine()
+    {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
+    }
+
+    public void SpeedBoostActive()
+    {
+        _isSpeedBoostActive = true;
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
+    }
+    IEnumerator SpeedBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isSpeedBoostActive = false;
+        _speed /= _speedMultiplier;
     }
 }
