@@ -24,14 +24,16 @@ public class Player : MonoBehaviour
 
 
     // variable for _isTripleShotActive
-    [SerializeField]
+
     private bool _isTripleShotActive = false;
-    [SerializeField]
     private bool _isSpeedBoostActive = false;
+    private bool _isShieldsActive = false;
     [SerializeField]
     private GameObject _tripleShotPrefab;
 
-
+    // variable reference to the shield visualizer
+    [SerializeField]
+    private GameObject _shieldVisualizer;
 
     // Start is called before the first frame update
     void Start()
@@ -144,7 +146,20 @@ public class Player : MonoBehaviour
     public void Damage()
     {
         // _lives--;
+        // if shields is active
+        // do something....
+        // deactivate shields
+        //return
+        if (_isShieldsActive == true)
+        {
+            _isShieldsActive = false;
+            _shieldVisualizer.SetActive(false);
+            return;
+            // disable the visualizer
+        }
+
         _lives = _lives - 1;
+
 
         // check if dead
         //destroy us
@@ -188,4 +203,12 @@ public class Player : MonoBehaviour
         _isSpeedBoostActive = false;
         _speed /= _speedMultiplier;
     }
+
+    public void ShieldsActive()
+    {
+        _isShieldsActive = true;
+        _shieldVisualizer.SetActive(true);
+        // enable te visualizer
+    }
+
 }
