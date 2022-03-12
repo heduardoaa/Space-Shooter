@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 
                 }
                 else
-                {
+                { 
                     transform.Translate(direction * (_speed * _speedMultiplier) * Time.deltaTime);
 
                 } */
