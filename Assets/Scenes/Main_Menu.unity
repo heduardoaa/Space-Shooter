@@ -326,7 +326,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Create by: H\xE9ctor Altamirano. "
+  m_Text: "Created by: H\xE9ctor Altamirano. "
 --- !u!222 &262282221
 CanvasRenderer:
   m_ObjectHideFlags: 0
