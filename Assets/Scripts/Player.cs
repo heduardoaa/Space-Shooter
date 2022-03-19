@@ -169,6 +169,8 @@ public class Player : MonoBehaviour
 
         _lives = _lives - 1;
 
+        _uiManager.UpdateLives(_lives);
+
 
         // check if dead
         //destroy us
