@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         // restart th current scene
         if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
         {
-            SceneManager.LoadScene(0); // Current Game Scene
+            SceneManager.LoadScene(1); // Current Game Scene
         }
     }
 

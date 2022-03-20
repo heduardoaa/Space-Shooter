@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Space Shooter.unity
-    guid: aa4c2995010298e4e8c47e95f7143cb5
-  - enabled: 1
     path: Assets/Scenes/Main_Menu.unity
     guid: dac56167b14c5a74ab20ffd4e0dd65cf
+  - enabled: 1
+    path: Assets/Scenes/Space Shooter.unity
+    guid: aa4c2995010298e4e8c47e95f7143cb5
   m_configObjects: {}
