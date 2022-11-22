@@ -1,3 +1,4 @@
-rep "Space Shooter@heduardoaa@cloud"
+repository "Space Shooter@heduardoaa@cloud"
   path "/"
-    smartbranch "/main"
+    br "/main"
+    co "/main"
